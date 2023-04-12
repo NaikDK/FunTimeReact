@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import { Button, Space, Input, Form, Checkbox } from "antd";
+import { Button, Input, Form } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Validationhandler from '../utils/validationHelper';
 import '../styles/SignUp.css';
 import { useLocation } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+
 
 const api = axios.create({
     baseURL: process.env.REACT_APP_BASEURL
