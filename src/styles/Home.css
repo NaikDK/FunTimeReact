@@ -1,0 +1,24 @@
+.item {
+    padding: 18px 28px;
+    cursor: pointer;
+    transition: color .3s ease-out;
+    text-decoration: none;
+    color: #111;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin: 5px 0;
+  }
+
+  .indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    border-radius: 30px;
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
+  }
