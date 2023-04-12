@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Row, Col,Table, Modal } from "antd";
 
 const Question = () => {
+    const navigate = useNavigate();
 
     const location = useLocation();
 
@@ -53,10 +54,12 @@ const Question = () => {
                     setData(resp.data);
                     queDisplay();
                 }else{
-                setShowTable(false)    
+                setShowTable(false);
+                onFinishHandle();
             }});
         }catch (e) {
             onFinishHandle();
+            navigate('/');
         }
     }
 

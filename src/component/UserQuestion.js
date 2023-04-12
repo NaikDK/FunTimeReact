@@ -4,6 +4,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { Button, Row, Col, Modal } from "antd";
 import Question from "./Question";
+import AWS from 'aws-sdk';
 
 const UserQuestion = () => {
 
@@ -13,6 +14,7 @@ const UserQuestion = () => {
     const [score, setScore] = useState(0);
     const [startTime, setStartTime] = useState(0);
     const [modal, setModal] = useState(true);
+    const [url, setUrl] = useState("");
 
     const onAnsHandle = (event) => {
         // if(event.target.value);
@@ -39,7 +41,18 @@ const UserQuestion = () => {
     }
 
     useEffect(() => {
-        
+
+        const secretsManager = new AWS.SecretsManager({
+            accessKeyId: "ASIAVUHCPTELGS4BMDFY",
+            secretAccessKey: "TJ/UXBEcRuMvduDC1Xbh7T1iKhQ5aXlktJcdFsVZ",
+            sessionToken: "FwoGZXIvYXdzEO3//////////wEaDPiOwEdZT9R7PXTE4SLAATmoCO/hAHdQ3SfdaiJUf/ZF/WjBFk0zj+WFHe6vV/IAUVrd+tmxfUVA6L0s8rXAkyTdJCyODAbAWOZW5AcQNOiAM0zKTeYMSpfLQpzgTkX4gzIrpGAiC32vKaSH+J4TGdr7mpIwmOVbeSyfPE7T2FTYWVBTczIJUNSidy1Dh9dEGtMDqbXzia4ZHjpKplDVdsuiFPNYnJpyAJJlBg/70jicdbklFtu1FcMYrbdKLn0cwXJWONeU1UYBhnSi59a8hii2idyhBjIt8V3tJcvOWldsSHiX9ZGEK1I2W5/YCUEQVgGp1uU6m+XiDkK1EFrgWjX6sZg3",
+            region: "us-east-1"
+            });
+
+            secretsManager.getSecretValue({ SecretId: 'apiGateway' }, function (err, data) {
+                console.log(data);
+                setUrl(data);
+            });
         // console.log(performance.now())
         // setQuestion(location.state.question);
         sessionStorage.setItem("score", 0);
