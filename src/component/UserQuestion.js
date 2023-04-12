@@ -43,7 +43,7 @@ const UserQuestion = () => {
         // console.log(performance.now())
         // setQuestion(location.state.question);
         sessionStorage.setItem("score", 0);
-        const evtSource = new EventSource("http://localhost:5000/listen")
+        const evtSource = new EventSource(process.env.REACT_APP_BASEURL + "listen")
             evtSource.addEventListener("LetsGo", (event) => { 
                 setModal(false);
                 var jsonstr = event.data;

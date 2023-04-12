@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 
 const api = axios.create({
-    baseURL: 'http://127.0.0.1:5000/'
+    baseURL: process.env.REACT_APP_BASEURL
 })
 
 const StartGame = () => {
@@ -20,7 +20,7 @@ const StartGame = () => {
     const navigate = useNavigate();
 
     const onStartHandle = () => {
-        const resp = axios.post("http://localhost:5000/startgame", {'usename': localStorage.getItem('username'), 'pin':pin})
+        const resp = axios.post(process.env.REACT_APP_BASEURL +  "startgame", {'usename': localStorage.getItem('username'), 'pin':pin})
         navigate('/livegame', {state: {
             username: username,
             pin: pin

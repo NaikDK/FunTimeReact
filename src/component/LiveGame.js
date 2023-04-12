@@ -6,7 +6,7 @@ import { Form, Input, Button, Table } from "antd";
 
 
 const api = axios.create({
-    baseURL: 'http://127.0.0.1:5000/'
+    baseURL: process.env.REACT_APP_BASEURL
 })
 
 const LiveGame = () => {
@@ -39,7 +39,7 @@ const LiveGame = () => {
 
     useEffect(() => {
         setPin(location.state.pin)
-        const evtSource = new EventSource("http://localhost:5000/listen")
+        const evtSource = new EventSource(process.env.REACT_APP_BASEURL + "listen")
         const eventName = "onUserConnect" + location.state.pin;
         console.log(eventName);
         evtSource.addEventListener(eventName, (event) => {

@@ -7,7 +7,7 @@ import { useLocation } from "react-router";
 
 
 const api = axios.create({
-    baseURL: 'http://127.0.0.1:5000/'
+    baseURL: process.env.REACT_APP_BASEURL
 })
 
 const CreateGame = () => {

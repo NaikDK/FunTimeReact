@@ -1,5 +1,5 @@
 import SimpleReactValidator from 'simple-react-validator';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const Validationhandler = (customMessage = {}, customValidator = {}) => {
   const [show, setShow] = useState(false);

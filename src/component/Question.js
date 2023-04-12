@@ -28,14 +28,14 @@ const Question = () => {
 
 
     const queDisplay = () => {
-        const resp = axios.post('http://localhost:5000/ping', {
+        const resp = axios.post(process.env.REACT_APP_BASEURL + 'ping', {
             "event": "LetsGo",
             "data": data
         })
     }
 
     const onFinishHandle = () => {
-        const resp = axios.post('http://localhost:5000/ping', {
+        const resp = axios.post(process.env.REACT_APP_BASEURL + 'ping', {
                 "event": "Finsh",
                 "data": "Done."
             }
@@ -46,14 +46,14 @@ const Question = () => {
 
     const onOkHandle = () => {
         try{
-            axios.post('http://localhost:5000/getNextQue',{
+            axios.post(process.env.REACT_APP_BASEURL + 'getNextQue',{
                     "pin": location.state.pin
             }).then(resp => {
                 if(resp.statusCode == 200){
                     setData(resp.data);
                     queDisplay();
                 }else{
-                    
+                setShowTable(false)    
             }});
         }catch (e) {
             onFinishHandle();
@@ -62,7 +62,7 @@ const Question = () => {
 
     const onNextHandle = async () => {
         try{
-        const res = await axios.post('http://localhost:5000/getScore', {
+        const res = await axios.post(process.env.REACT_APP_BASEURL + 'getScore', {
             'pin': location.state.pin
         })
         setTableData(res.data);
@@ -74,24 +74,16 @@ const Question = () => {
 
     useEffect(() => {
 
-        axios.post('http://localhost:5000/getque',{
+        axios.post(process.env.REACT_APP_BASEURL + 'getque',{
             'pin': location.state.pin
         }).then(response => {
                 console.log(response.data);
                 setData(response.data);
-                const resp = axios.post('http://localhost:5000/ping', {
+                const resp = axios.post(process.env.REACT_APP_BASEURL + 'ping', {
                 "event": "LetsGo",
                 "data": response.data
             })
     })
-        // console.log(response)
-        // const newData = JSON.parse(response.data)
-        // console.log(newData)
-        // setData(response.data);
-        // const resp = axios.post('http://localhost:5000/ping', {
-        //     "event": "LetsGo",
-        //     "data": data
-        // })
     }, [])
 
     return(
